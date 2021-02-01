@@ -5,7 +5,7 @@ import (
 
 	uuid "github.com/satori/go.uuid"
 
-	"github.com/codeedu/imersao/codepix-go/domain/model"
+	"github.com/RenanCSO/imersao-fullstack-fullcycle/domain/model"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,7 +21,7 @@ func TestModel_NewAccount(t *testing.T) {
 	require.Nil(t, err)
 	require.NotEmpty(t, uuid.FromStringOrNil(account.ID))
 	require.Equal(t, account.Number, accountNumber)
-	require.Equal(t, account.BankID, bank.ID)
+	require.Equal(t, account.Bank.ID, bank.Base.ID)
 
 	_, err = model.NewAccount(bank, "", ownerName)
 	require.NotNil(t, err)

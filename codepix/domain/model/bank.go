@@ -22,7 +22,7 @@ func (bank *Bank) isValid() error {
 }
 
 func NewBank(code string, name string) (*Bank, error) {
-	bank := Bank{
+	bank := Bank {
 		Code: code,
 		Name: name,
 	}
