@@ -22,9 +22,12 @@ func (user *User) isValid() error {
 
 // NewUser is a function to create Users
 func NewUser(name string, email string) (*User, error) {
+	user := User {
+		Name: name,
+		Email: email,
+	}
+
 	user.ID = uuid.NewV4().String()
-	user.Name = name
-	user.Email = email
 
 	err := user.isValid()
 	if err != nil {
