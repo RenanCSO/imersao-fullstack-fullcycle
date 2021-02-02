@@ -2,14 +2,15 @@ package grpc
 
 import (
 	"fmt"
-	"github.com/codeedu/imersao/codepix-go/application/grpc/pb"
-	"github.com/codeedu/imersao/codepix-go/application/usecase"
-	"github.com/codeedu/imersao/codepix-go/infrastructure/repository"
-	"github.com/jinzhu/gorm"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+
+	"github.com/jinzhu/gorm"
+	"github.com/renancso/imersao/codepix-go/application/grpc/pb"
+	"github.com/renancso/imersao/codepix-go/application/usecase"
+	"github.com/renancso/imersao/codepix-go/infrastructure/repository"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func StartGrpcServer(database *gorm.DB, port int) {
