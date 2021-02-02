@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// PixKeyRepositoryInterface is an interface to create PixKey
 type PixKeyRepositoryInterface interface {
 	RegisterKey(pixKey *PixKey) (*PixKey, error)
 	FindKeyByKind(key string, kind string) (*PixKey, error)
@@ -15,6 +16,7 @@ type PixKeyRepositoryInterface interface {
 	FindAccount(id string) (*Account, error)
 }
 
+// PixKey is a model to represent Pix keys (cpf and email)
 type PixKey struct {
 	Base      `valid:"required"`
 	Kind      string   `json:"kind" valid:"notnull"`
@@ -41,6 +43,7 @@ func (pixKey *PixKey) isValid() error {
 	return nil
 }
 
+// NewPixKey is a function to create PixKeys related to an account
 func NewPixKey(kind string, account *Account, key string) (*PixKey, error) {
 
 	pixKey := PixKey{

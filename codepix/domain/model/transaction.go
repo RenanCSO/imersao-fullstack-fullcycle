@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Constants to represent Transactions states
 const (
 	TransactionPending   string = "pending"
 	TransactionCompleted string = "completed"
@@ -14,16 +15,19 @@ const (
 	TransactionConfirmed string = "confirmed"
 )
 
+// TransactionRepositoryInterface is an interface to do Transaction
 type TransactionRepositoryInterface interface {
 	Register(transaction *Transaction) error
 	Save(transaction *Transaction) error
 	Find(id string) (*Transaction, error)
 }
 
+// Transactions is a model where we have a list of Transaction
 type Transactions struct {
 	Transaction []Transaction
 }
 
+// Transaction is a model to represent Transaction in a Bank
 type Transaction struct {
 	Base              `valid:"required"`
 	AccountFrom       *Account `valid:"-"`
@@ -55,6 +59,7 @@ func (t *Transaction) isValid() error {
 	return nil
 }
 
+// NewTransaction is a function to create a Transaction
 func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
 	transaction := Transaction{
 		AccountFrom: accountFrom,
@@ -75,6 +80,7 @@ func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, desc
 	return &transaction, nil
 }
 
+// Complete is a function to complete a transaction
 func (t *Transaction) Complete() error {
 	t.Status = TransactionCompleted
 	t.UpdatedAt = time.Now()
@@ -82,6 +88,7 @@ func (t *Transaction) Complete() error {
 	return err
 }
 
+// Confirm is a function to confirm a transaction
 func (t *Transaction) Confirm() error {
 	t.Status = TransactionConfirmed
 	t.UpdatedAt = time.Now()
@@ -89,6 +96,7 @@ func (t *Transaction) Confirm() error {
 	return err
 }
 
+// Cancel is a function to cancel a transaction
 func (t *Transaction) Cancel(description string) error {
 	t.Status = TransactionError
 	t.UpdatedAt = time.Now()

@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Account is a bank account model
 type Account struct {
 	Base      `valid:"required"`
 	OwnerName string    `json:"owner_name" valid:"notnull"`
@@ -22,6 +23,7 @@ func (account *Account) isValid() error {
 	return nil
 }
 
+// NewAccount is a function to create accounts
 func NewAccount(bank *Bank, number string, ownerName string) (*Account, error) {
 	account := Account{
 		OwnerName: ownerName,

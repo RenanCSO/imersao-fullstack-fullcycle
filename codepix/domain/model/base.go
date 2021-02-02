@@ -9,6 +9,7 @@ func init() {
 	govalidator.SetFieldsRequiredByDefault(true)
 }
 
+// Base is the base struct of Banks
 type Base struct {
 	ID        string    `json:"id" valid:"uuid"`
 	CreatedAt time.Time `json:"created_at" valid:"-"`

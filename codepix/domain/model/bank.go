@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Bank is a bank model
 type Bank struct {
 	Base     `valid:"required"`
 	Code     string     `json:"code" valid:"notnull"`
@@ -21,6 +22,7 @@ func (bank *Bank) isValid() error {
 	return nil
 }
 
+// NewBank is a function to create Banks
 func NewBank(code string, name string) (*Bank, error) {
 	bank := Bank {
 		Code: code,
