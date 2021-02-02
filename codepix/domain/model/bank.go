@@ -1,12 +1,16 @@
 package model
 
 import (
+	"time"
+
 	"github.com/asaskevich/govalidator"
 	uuid "github.com/satori/go.uuid"
-	"time"
 )
 
-// Bank is a bank model
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 type Bank struct {
 	Base     `valid:"required"`
 	Code     string     `json:"code" gorm:"type:varchar(20)" valid:"notnull"`
@@ -22,20 +26,16 @@ func (bank *Bank) isValid() error {
 	return nil
 }
 
-// NewBank is a function to create Banks
 func NewBank(code string, name string) (*Bank, error) {
-	bank := Bank {
+	bank := Bank{
 		Code: code,
 		Name: name,
 	}
-
 	bank.ID = uuid.NewV4().String()
 	bank.CreatedAt = time.Now()
-
 	err := bank.isValid()
 	if err != nil {
 		return nil, err
 	}
-
 	return &bank, nil
 }

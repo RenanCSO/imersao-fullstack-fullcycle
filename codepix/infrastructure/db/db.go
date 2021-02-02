@@ -6,10 +6,11 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/codeedu/imersao/codepix-go/domain/model"
+
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-	"github.com/RenanCSO/imersao-fullstack-fullcycle/codepix/domain/model"
 	_ "gorm.io/driver/sqlite"
 )
 
@@ -30,8 +31,8 @@ func ConnectDB(env string) *gorm.DB {
 	var err error
 
 	if env != "test" {
-		dsn = os.Getenv("dns")
-		db, err = gorm.Open(os.Getenv("dbtype"), dsn)
+		dsn = os.Getenv("dsn")
+		db, err = gorm.Open(os.Getenv("dbType"), dsn)
 	} else {
 		dsn = os.Getenv("dsnTest")
 		db, err = gorm.Open(os.Getenv("dbTypeTest"), dsn)
@@ -46,7 +47,7 @@ func ConnectDB(env string) *gorm.DB {
 		db.LogMode(true)
 	}
 
-	if os.Getenv("AutoMigration") == "true" {
+	if os.Getenv("AutoMigrateDb") == "true" {
 		db.AutoMigrate(&model.Bank{}, &model.Account{}, &model.PixKey{}, &model.Transaction{}, &model.User{})
 	}
 
